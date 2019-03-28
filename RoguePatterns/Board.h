@@ -1,6 +1,7 @@
 #pragma once
 #include "olcPixelGameEngine.h"
 #include "Point.h"
+#include <string>
 
 class Board {
 
@@ -14,12 +15,13 @@ public:
 
 
 	void drawBoard();
-
-
+	void drawCreature(const Point& pos, const char& avatar, const olc::Pixel& color) const;
+	void toggleGrid();
 
 private:
 	void centerBoard();
 	void drawEdges();
+	Point centerSymbolInCell(Point& pos) const;
 
 public:
 	int positionX;
@@ -35,4 +37,8 @@ public:
 	int windowY;
 
 	olc::PixelGameEngine* pge;
+	int symbolSize = 2;
+	static constexpr int baseSymbolSize = 8;
+
+	bool showGrid = true;
 };

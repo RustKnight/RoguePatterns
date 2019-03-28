@@ -4,11 +4,13 @@
 #include "olcPixelGameEngine.h"
 
 #include "Board.h"
+#include "Creature.h"
 
 class Demo : public olc::PixelGameEngine
 {
 public:
-	Demo() : winsizeX {800}, winsizeY {600}, board (12, 12, 50, 30, getWinWidth(), getWinHeight(), this)
+	Demo() : winsizeX {800}, winsizeY {600}, board (25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
+		player(std::string{ "Knight" }, 'K', Point{ 5, 5 }, olc::DARK_YELLOW, &board, this), enemy(std::string{ "Lurker" }, 'Z', Point{ 10, 5 }, olc::DARK_RED, &board, this)
 	{
 		sAppName = "Demo";
 	}
@@ -35,9 +37,15 @@ public:
 			board.cellSizeY--;
 		}
 
+		if (GetKey(olc::G).bPressed)
+			board.toggleGrid();
 		
 		board.drawBoard();
+		player.control();
+		player.draw();
 
+		
+		enemy.draw();
 
 		return true;
 	}
@@ -51,6 +59,8 @@ private:
 	int winsizeY;
 
 	Board board;
+	Creature player;
+	Creature enemy;
 };
 
 

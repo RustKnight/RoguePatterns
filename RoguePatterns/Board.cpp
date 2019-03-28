@@ -34,16 +34,47 @@ void Board::drawEdges()
 	pge->FillRect(bottomLeftCorner.x, bottomLeftCorner.y, boardPixelWidth + edgeWidth * 2, edgeWidth, olc::VERY_DARK_GREY);
 }
 
+
 void Board::drawBoard()
 {
 
 	centerBoard();
 
-	for (size_t w = positionX; w < width * cellSizeX + positionX; w += cellSizeX)
-		for (size_t h = positionY; h < height * cellSizeY + positionY; h += cellSizeY)
-			pge->DrawRect(w, h, cellSizeX, cellSizeY, olc::DARK_GREY);
+	if (showGrid){
+		for (int w = positionX; w < width * cellSizeX + positionX; w += cellSizeX)
+			for (int h = positionY; h < height * cellSizeY + positionY; h += cellSizeY)
+				pge->DrawRect(w, h, cellSizeX, cellSizeY, olc::DARK_GREY);
+	}
 
 	drawEdges();
 
 	
+}
+
+void Board::drawCreature(const Point& pos, const char& avatar, const olc::Pixel& color) const
+{
+
+	Point positionOnScreen{ positionX + pos.x * cellSizeX, positionY + pos.y * cellSizeY };
+	Point centeredPos = centerSymbolInCell (positionOnScreen);
+
+	pge->DrawString(centeredPos.x, centeredPos.y, std::string(1, avatar), color, symbolSize);
+
+}
+
+void Board::toggleGrid()
+{
+	showGrid = !showGrid;
+}
+
+
+Point Board::centerSymbolInCell(Point& pos) const
+{
+	int halfCellX = cellSizeX / 2;
+	int halfCellY = cellSizeY / 2;
+	int halfSymbol = (baseSymbolSize * symbolSize) / 2 -1;
+
+	int x = pos.x + halfCellX - halfSymbol;
+	int y = pos.y + halfCellY - halfSymbol;
+
+	return Point{ x,y };
 }
