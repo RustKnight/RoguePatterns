@@ -11,8 +11,12 @@ public:
 		name{ name }, avatar{ avatar }, pos{ pos }, color{ color }, brd{ brd }, pge{ pge }
 	{}
 
-	void control();
 	void draw() const;
+
+	void up();
+	void down();
+	void left();
+	void right();
 
 
 private:

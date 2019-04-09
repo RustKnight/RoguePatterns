@@ -3,16 +3,19 @@
 #include "Point.h"
 #include <string>
 
+
+
+
 class Board {
 
 public:
 	Board(int cellSizeX, int cellSizeY, int boardWidth, int boardHeight, int windowX, int windowY, olc::PixelGameEngine* pge) :
-		cellSizeX{ cellSizeX }, cellSizeY{ cellSizeY }, width{ boardWidth }, height{ boardHeight }, windowX{ windowX }, windowY{ windowY }, positionX{ 0 }, positionY{ 0 }, pge {pge}
+		cellSizeX{ cellSizeX }, cellSizeY{ cellSizeY }, boardWidth{ boardWidth }, boardHeight{ boardHeight }, windowX{ windowX }, windowY{ windowY }, boardPosX{ 0 }, boardPosY{ 0 }, pge {pge}
 	{
 		centerBoard();
 	}
 
-
+	
 
 	void drawBoard();
 	void drawCreature(const Point& pos, const char& avatar, const olc::Pixel& color) const;
@@ -24,14 +27,14 @@ private:
 	Point centerSymbolInCell(Point& pos) const;
 
 public:
-	int positionX;
-	int positionY;
+	int boardPosX;
+	int boardPosY;
 
 	int cellSizeX;
 	int cellSizeY;
 
-	int width;
-	int height;
+	int boardWidth;
+	int boardHeight;
 
 	int windowX;
 	int windowY;

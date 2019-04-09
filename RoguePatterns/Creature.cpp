@@ -1,20 +1,27 @@
 #include "Creature.h"
 
-void Creature::control()
-{
-
-	if (pge->GetKey(olc::A).bPressed)
-		pos.x -= 1;
-	else if (pge->GetKey(olc::D).bPressed)
-	 	pos.x += 1;
-	else if (pge->GetKey(olc::W).bPressed)
-	 	pos.y -= 1;
-	else if (pge->GetKey(olc::S).bPressed)
-		pos.y += 1;
-
-}
 
 void Creature::draw() const
 {
 	brd->drawCreature(pos, avatar, color);
+}
+
+void Creature::up()
+{
+	pos.y -= 1;
+}
+
+void Creature::down()
+{
+	pos.y += 1;
+}
+
+void Creature::left()
+{
+	pos.x -= 1;
+}
+
+void Creature::right()
+{
+	pos.x += 1;
 }

@@ -145,12 +145,15 @@
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Demo.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="olcPixelGameEngine.h" />
     <ClInclude Include="Point.h" />
   </ItemGroup>
