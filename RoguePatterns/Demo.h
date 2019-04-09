@@ -6,6 +6,7 @@
 #include "Board.h"
 #include "Creature.h"
 #include "InputHandler.h"
+#include "Strategy.h"
 
 // add weapons of different attack values (Ex: Axe +2, Sword +1, etc. - naming will just be flavor for now)
 // add ability for players to pick up different weapons and be able to exchange them when desired
@@ -19,7 +20,7 @@ public:
 	Demo() : winsizeX {800}, winsizeY {600}, 
 		board (25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
 		player(std::string	{ "Knight" }, 'K', Point{ 5, 5 }, olc::YELLOW, &board, this), 
-		enemy(std::string	{ "Lurker" }, 'Z', Point{ 10, 5 }, olc::RED, &board, this),
+		enemy(std::string	{ "Lurker" }, 'Z', Point{ 6, 5 }, olc::RED, &board, this),
 		inputHandler (this)
 	{
 		sAppName = "Demo";
@@ -28,7 +29,11 @@ public:
 public:
 	bool OnUserCreate() override
 	{
+		player.equip(&sword);
+		enemy.equip(&axe);
 
+		player.attack(enemy);
+		enemy.attack(player);
 		return true;
 	}
 
@@ -56,6 +61,7 @@ public:
 		Command* doThis = inputHandler.handleInput();
 		if (doThis) doThis->execute(player);
 		
+		
 
 		player.draw();
 		enemy.draw();
@@ -79,6 +85,10 @@ private:
 	Creature player;
 	Creature enemy;
 	InputHandler inputHandler;
+
+	//weapons
+	Sword sword;
+	Axe axe;
 };
 
 

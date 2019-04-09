@@ -6,6 +6,16 @@ void Creature::draw() const
 	brd->drawCreature(pos, avatar, color);
 }
 
+void Creature::equip(Weapon* weapon)
+{
+	this->weapon = weapon;
+}
+
+void Creature::attack(Creature& target)
+{
+	weapon->apply(*this, target);
+}
+
 void Creature::up()
 {
 	pos.y -= 1;
