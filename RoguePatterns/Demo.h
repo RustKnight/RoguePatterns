@@ -33,6 +33,7 @@ public:
 		enemy.equip(&axe);
 
 		player.attack(enemy);
+		cout << endl;
 		enemy.attack(player);
 		return true;
 	}

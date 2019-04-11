@@ -1,5 +1,6 @@
 #include "Creature.h"
 
+#include "Strategy.h"
 
 void Creature::draw() const
 {

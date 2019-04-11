@@ -6,11 +6,11 @@
 #include <string>
 
 
-
+class Weapon;
 
 class Creature {
 
-	class Weapon;
+	
 
 public:
 	Creature (std::string name, char avatar, Point pos, olc::Pixel color, Board* brd, olc::PixelGameEngine* pge):
