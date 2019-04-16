@@ -24,13 +24,12 @@ protected:
 
 class Axe : public Weapon {
 public:
-	Axe(Point location, Board* brd, olc::PixelGameEngine* pge):
+	Axe(Board* brd, olc::PixelGameEngine* pge):
 		Weapon (5, brd, pge)
 	{
 		name = "axe";
 		avatar = '$';
-		color = olc::DARK_CYAN;
-		pos = location;
+		color = olc::DARK_CYAN;		
 	}
 
 
@@ -42,13 +41,12 @@ public:
 
 class Sword : public Weapon {
 public:
-	Sword(Point location, Board* brd, olc::PixelGameEngine* pge) :
+	Sword(Board* brd, olc::PixelGameEngine* pge) :
 		Weapon(2, brd, pge)
 	{
 		name = "sword";
 		avatar = '!';
 		color = olc::DARK_CYAN;
-		pos = location;
 	}
 
 

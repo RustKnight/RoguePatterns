@@ -21,8 +21,8 @@ public:
 		board	(25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
 		player	(std::string	{ "Knight" }, 'K', Point{ 5, 5 }, olc::YELLOW, &board, this),
 		enemy	(std::string	{ "Lurker" }, 'Z', Point{ 6, 5 }, olc::RED, &board, this),
-		axe		(board.getRandomLocation(), &board, this),
-		sword	(board.getRandomLocation(), &board, this),
+		axe		(&board, this),
+		sword	(&board, this),
 		inputHandler (this)
 	{
 		sAppName = "Demo";
@@ -31,6 +31,11 @@ public:
 public:
 	bool OnUserCreate() override
 	{
+		axe.assignRandomBoardPosition();
+		sword.assignRandomBoardPosition();
+		//player.assignRandomBoardPosition();
+		//enemy.assignRandomBoardPosition();
+
 		player.equip(&sword);
 		enemy.equip(&axe);
 

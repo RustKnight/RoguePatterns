@@ -17,8 +17,10 @@ public:
 	{}
 
 
+	void assignRandomBoardPosition();
 	void draw() const;
 	std::string getName() const { return name; }
+
 
 
 protected:
