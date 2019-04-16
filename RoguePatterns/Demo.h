@@ -31,8 +31,8 @@ public:
 public:
 	bool OnUserCreate() override
 	{
-		axe.assignRandomBoardPosition();
-		sword.assignRandomBoardPosition();
+		//axe.assignRandomBoardPosition();
+		//sword.assignRandomBoardPosition();
 		//player.assignRandomBoardPosition();
 		//enemy.assignRandomBoardPosition();
 
