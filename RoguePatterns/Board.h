@@ -3,6 +3,8 @@
 #include "Point.h"
 #include <string>
 
+//#include "Map.h"
+
 
 
 
@@ -43,6 +45,7 @@ public:
 	olc::PixelGameEngine* pge;
 	int symbolSize = 2;
 	static constexpr int baseSymbolSize = 8;
+	//Map map;
 
 	bool showGrid = true;
 };

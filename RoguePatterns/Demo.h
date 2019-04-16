@@ -14,6 +14,8 @@
 // action text will be outputed in the command line
 
 
+// maybe make feedback text appear in game in an interface - colorfull 
+
 class Demo : public olc::PixelGameEngine
 {
 public:

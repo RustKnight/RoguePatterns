@@ -51,6 +51,6 @@ public:
 
 
 	void apply(Thing& attacker, Thing& target) override {
-		cout << attacker.getName() << " hacks " << target.getName() << " with his + " << damage << name << "!";
+		cout << attacker.getName() << " slashes " << target.getName() << " with his + " << damage << name << "!";
 	}
 };
