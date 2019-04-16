@@ -1,20 +1,20 @@
 #pragma once
 
 #include <iostream>
-#include "Creature.h"
+#include "Thing.h"
 
 using namespace std;
 
 
 
-class Weapon {
+class Weapon : public Thing{
 public:
 	
-	Weapon(int dam):
-		damage {dam}
+	Weapon(int dam, Board* brd, olc::PixelGameEngine* pge):
+		Thing(brd, pge), damage{ dam }
 	{}
 
-	virtual void apply(Creature& attacker, Creature& target) = 0;
+	virtual void apply(Thing& attacker, Thing& target) = 0;
 	virtual ~Weapon() = default;
 
 protected:
@@ -24,28 +24,35 @@ protected:
 
 class Axe : public Weapon {
 public:
-	Axe():
-		Weapon (5)
-	{}
-
-
-	void apply(Creature& attacker, Creature& target) override {
-		cout << attacker.getName() << " hacks " << target.getName() << " with his +" << damage << " axe!";
+	Axe(Point location, Board* brd, olc::PixelGameEngine* pge):
+		Weapon (5, brd, pge)
+	{
+		name = "axe";
+		avatar = '$';
+		color = olc::DARK_CYAN;
+		pos = location;
 	}
 
 
+	void apply(Thing& attacker, Thing& target) override {
+		cout << attacker.getName() << " hacks " << target.getName() << " with his +" << damage << name << "!";
+	}
 };
 
 
 class Sword : public Weapon {
 public:
-	Sword() :
-		Weapon(1)
-	{}
-
-
-	void apply(Creature& attacker, Creature& target) override {
-		cout << attacker.getName() << " slashes " << target.getName() << " with his +" << damage << " sword!";
+	Sword(Point location, Board* brd, olc::PixelGameEngine* pge) :
+		Weapon(2, brd, pge)
+	{
+		name = "sword";
+		avatar = '!';
+		color = olc::DARK_CYAN;
+		pos = location;
 	}
 
+
+	void apply(Thing& attacker, Thing& target) override {
+		cout << attacker.getName() << " hacks " << target.getName() << " with his +" << damage << name << "!";
+	}
 };

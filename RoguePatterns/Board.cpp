@@ -64,6 +64,11 @@ void Board::toggleGrid()
 	showGrid = !showGrid;
 }
 
+Point Board::getRandomLocation() const
+{
+	return Point{rand() % boardWidth, rand() % boardHeight};
+}
+
 
 Point Board::centerSymbolInCell(Point& pos) const
 {

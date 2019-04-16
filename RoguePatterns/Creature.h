@@ -2,22 +2,21 @@
 #include"olcPixelGameEngine.h"
 #include "Point.h"
 #include "Board.h"
+#include "Thing.h"
 
 #include <string>
 
 
 class Weapon;
 
-class Creature {
-
-	
+class Creature : public Thing{
 
 public:
+
 	Creature (std::string name, char avatar, Point pos, olc::Pixel color, Board* brd, olc::PixelGameEngine* pge):
-		name{ name }, avatar{ avatar }, pos{ pos }, color{ color }, brd{ brd }, pge{ pge }
+		Thing (name, avatar, pos, color, brd, pge)
 	{}
 
-	void draw() const;
 	void equip(Weapon* weapon);
 	void attack(Creature& target);
 
@@ -26,16 +25,7 @@ public:
 	void left();
 	void right();
 
-	std::string getName() const { return name; }
 
 private:
-	std::string name;
-	Point pos;
-	char avatar;
-	olc::Pixel color;
-
-	Board* brd;
-	olc::PixelGameEngine* pge;
-
 	Weapon* weapon = nullptr;
 };

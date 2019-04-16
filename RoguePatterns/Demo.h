@@ -18,9 +18,11 @@ class Demo : public olc::PixelGameEngine
 {
 public:
 	Demo() : winsizeX {800}, winsizeY {600}, 
-		board (25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
-		player(std::string	{ "Knight" }, 'K', Point{ 5, 5 }, olc::YELLOW, &board, this), 
-		enemy(std::string	{ "Lurker" }, 'Z', Point{ 6, 5 }, olc::RED, &board, this),
+		board	(25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
+		player	(std::string	{ "Knight" }, 'K', Point{ 5, 5 }, olc::YELLOW, &board, this),
+		enemy	(std::string	{ "Lurker" }, 'Z', Point{ 6, 5 }, olc::RED, &board, this),
+		axe		(board.getRandomLocation(), &board, this),
+		sword	(board.getRandomLocation(), &board, this),
 		inputHandler (this)
 	{
 		sAppName = "Demo";
@@ -35,6 +37,12 @@ public:
 		player.attack(enemy);
 		cout << endl;
 		enemy.attack(player);
+
+		vThings.push_back(&axe);
+		vThings.push_back(&sword);
+		vThings.push_back(&player);
+		vThings.push_back(&enemy);
+
 		return true;
 	}
 
@@ -63,9 +71,8 @@ public:
 		if (doThis) doThis->execute(player);
 		
 		
-
-		player.draw();
-		enemy.draw();
+		for (Thing* thing : vThings)
+			thing->draw();
 
 		return true;
 	}
@@ -83,6 +90,8 @@ private:
 	int winsizeY;
 
 	Board board;
+	vector<Thing*> vThings;
+
 	Creature player;
 	Creature enemy;
 	InputHandler inputHandler;

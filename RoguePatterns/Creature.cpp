@@ -2,10 +2,7 @@
 
 #include "Strategy.h"
 
-void Creature::draw() const
-{
-	brd->drawCreature(pos, avatar, color);
-}
+
 
 void Creature::equip(Weapon* weapon)
 {

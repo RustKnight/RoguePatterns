@@ -20,6 +20,7 @@ public:
 	void drawBoard();
 	void drawCreature(const Point& pos, const char& avatar, const olc::Pixel& color) const;
 	void toggleGrid();
+	Point getRandomLocation() const;
 
 private:
 	void centerBoard();
