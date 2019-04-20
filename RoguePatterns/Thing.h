@@ -18,7 +18,7 @@ public:
 
 
 	void assignRandomBoardPosition();
-	void draw() const;
+	void draw() const;	// board will simply draw all contents of map
 	std::string getName() const { return name; }
 
 

@@ -5,10 +5,10 @@
 #include "Thing.h"
 using namespace std;
 
-// inside Board? in Demo ? where ?
+
 
 class Map {
-
+public:
 	Map() = default;
 	
 

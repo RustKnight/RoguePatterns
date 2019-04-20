@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Creature.h"
 #include "Command.h"
 #include "olcPixelGameEngine.h"
 

@@ -3,7 +3,7 @@
 #include "Point.h"
 #include <string>
 
-//#include "Map.h"
+
 
 
 
@@ -20,7 +20,7 @@ public:
 	
 
 	void drawBoard();
-	void drawCreature(const Point& pos, const char& avatar, const olc::Pixel& color) const;
+	void drawThing(const Point& pos, const char& avatar, const olc::Pixel& color) const;
 	void toggleGrid();
 	Point getRandomLocation() const;
 
@@ -45,7 +45,6 @@ public:
 	olc::PixelGameEngine* pge;
 	int symbolSize = 2;
 	static constexpr int baseSymbolSize = 8;
-	//Map map;
 
 	bool showGrid = true;
 };

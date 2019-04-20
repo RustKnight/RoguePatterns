@@ -48,7 +48,7 @@ void Board::drawBoard()
 	drawEdges();	
 }
 
-void Board::drawCreature(const Point& pos, const char& avatar, const olc::Pixel& color) const
+void Board::drawThing(const Point& pos, const char& avatar, const olc::Pixel& color) const
 {
 
 	Point positionOnScreen{ boardPosX + pos.x * cellSizeX, boardPosY + pos.y * cellSizeY };

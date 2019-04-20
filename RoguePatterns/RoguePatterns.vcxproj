@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ai.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Creature.cpp" />
     <ClCompile Include="InputHandler.cpp" />
@@ -150,6 +151,7 @@
     <ClCompile Include="Thing.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ai.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="Creature.h" />

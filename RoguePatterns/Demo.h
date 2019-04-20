@@ -7,6 +7,7 @@
 #include "Creature.h"
 #include "InputHandler.h"
 #include "Strategy.h"
+#include "Ai.h"
 
 // add weapons of different attack values (Ex: Axe +2, Sword +1, etc. - naming will just be flavor for now)
 // add ability for players to pick up different weapons and be able to exchange them when desired
@@ -74,9 +75,15 @@ public:
 
 		board.drawBoard();
 
-		Command* doThis = inputHandler.handleInput();
-		if (doThis) doThis->execute(player);
+		Command* inputAction = inputHandler.handleInput();
+		if (inputAction) inputAction->execute(player);
 		
+		// for each enemy in enemies array use ai module for them to make them act
+
+		Command* doThis = ai.control(enemy);
+		if (inputAction && doThis) doThis->execute(enemy);
+			
+	
 		
 		for (Thing* thing : vThings)
 			thing->draw();
@@ -98,6 +105,7 @@ private:
 
 	Board board;
 	vector<Thing*> vThings;
+	Ai ai;
 
 	Creature player;
 	Creature enemy;

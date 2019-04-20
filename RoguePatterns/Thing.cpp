@@ -7,5 +7,5 @@ void Thing::assignRandomBoardPosition()
 
 void Thing::draw() const
 {
-	brd->drawCreature(pos, avatar, color);
+	brd->drawThing(pos, avatar, color);
 }
