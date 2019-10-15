@@ -48,14 +48,14 @@ void Board::drawBoard()
 	drawEdges();	
 }
 
-void Board::drawThing(const Point& pos, const char& avatar, const olc::Pixel& color) const
+void Board::drawThing(const Thing& thing) const
 {
 
-	Point positionOnScreen{ boardPosX + pos.x * cellSizeX, boardPosY + pos.y * cellSizeY };
+	Point positionOnScreen{ boardPosX + thing.getPosition().x * cellSizeX, boardPosY + thing.getPosition().y * cellSizeY };
 	Point centeredPos = centerSymbolInCell (positionOnScreen);
 
 	pge->FillRect(positionOnScreen.x, positionOnScreen.y, cellSizeX, cellSizeY, olc::VERY_DARK_GREY);
-	pge->DrawString(centeredPos.x, centeredPos.y, std::string(1, avatar), color, symbolSize);
+	pge->DrawString(centeredPos.x, centeredPos.y, std::string(1, thing.getAvatar()), thing.getColor(), symbolSize);
 
 }
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "olcPixelGameEngine.h"
 #include "Point.h"
+#include "Thing.h"
 #include <string>
-
 
 
 
@@ -20,7 +20,7 @@ public:
 	
 
 	void drawBoard();
-	void drawThing(const Point& pos, const char& avatar, const olc::Pixel& color) const;
+	void drawThing(const Thing& thing) const;
 	void toggleGrid();
 	Point getRandomLocation() const;
 

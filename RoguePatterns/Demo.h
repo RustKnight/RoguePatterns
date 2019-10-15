@@ -8,6 +8,7 @@
 #include "InputHandler.h"
 #include "Strategy.h"
 #include "Ai.h"
+#include "Map.h"
 
 // add weapons of different attack values (Ex: Axe +2, Sword +1, etc. - naming will just be flavor for now)
 // add ability for players to pick up different weapons and be able to exchange them when desired
@@ -17,15 +18,20 @@
 
 // maybe make feedback text appear in game in an interface - colorfull 
 
+// input handler should be a component of thing.
+// it should also be 2 derived classes one that allows actual player keyboard control
+// and the other that hooks it up to an AI, that produces the input
+// these 2 derived classes will be switchable the Thing class holding an interface to these two.
+
 class Demo : public olc::PixelGameEngine
 {
 public:
 	Demo() : winsizeX {800}, winsizeY {600}, 
 		board	(25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
-		player	(std::string	{ "Knight" }, 'K', Point{ 5, 5 }, olc::YELLOW, &board, this),
-		enemy	(std::string	{ "Lurker" }, 'Z', Point{ 6, 5 }, olc::RED, &board, this),
-		axe		(&board, this),
-		sword	(&board, this),
+		player	(std::string	{ "Knight" }, 'K', Point{ 5, 5 }, olc::YELLOW, this),
+		enemy	(std::string	{ "Lurker" }, 'Z', Point{ 6, 5 }, olc::RED, this),
+		axe		(this),
+		sword	(this),
 		inputHandler (this)
 	{
 		sAppName = "Demo";
@@ -46,10 +52,10 @@ public:
 		cout << endl;
 		enemy.attack(player);
 
-		vThings.push_back(&axe);
-		vThings.push_back(&sword);
-		vThings.push_back(&player);
-		vThings.push_back(&enemy);
+		map.addThing(&axe);
+		map.addThing(&sword);
+		map.addThing(&player);
+		map.addThing(&enemy);
 
 		return true;
 	}
@@ -84,9 +90,9 @@ public:
 		if (inputAction && doThis) doThis->execute(enemy);
 			
 	
-		
-		for (Thing* thing : vThings)
-			thing->draw();
+		// board will call the draw routing
+		for (Thing* thing : map.vThings)
+			board.drawThing(*thing);
 
 		return true;
 	}
@@ -104,7 +110,7 @@ private:
 	int winsizeY;
 
 	Board board;
-	vector<Thing*> vThings;
+	Map map;
 	Ai ai;
 
 	Creature player;

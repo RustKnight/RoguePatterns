@@ -5,14 +5,15 @@
 #include "Thing.h"
 using namespace std;
 
-
+class Thing;
 
 class Map {
 public:
 	Map() = default;
 	
-
+	void addThing(Thing* thing);
+	vector<Thing*> vThings;
 
 private:
-	vector<Thing*> vThings;
+	
 };
