@@ -41,19 +41,16 @@
     <ClInclude Include="Strategy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Demo.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="Thing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Ai.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InteractionHandler.h">
+    <ClInclude Include="Food.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -76,7 +73,7 @@
     <ClCompile Include="Ai.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="Food.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

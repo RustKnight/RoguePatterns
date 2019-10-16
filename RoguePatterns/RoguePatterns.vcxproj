@@ -146,9 +146,9 @@
     <ClCompile Include="Ai.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Creature.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Thing.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -158,10 +158,9 @@
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Demo.h" />
     <ClInclude Include="InputHandler.h" />
-    <ClInclude Include="InteractionHandler.h" />
-    <ClInclude Include="Map.h" />
     <ClInclude Include="olcPixelGameEngine.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="Strategy.h" />
     <ClInclude Include="Thing.h" />
   </ItemGroup>

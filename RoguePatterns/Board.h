@@ -10,6 +10,7 @@
 
 class Board {
 
+
 public:
 	Board(int cellSizeX, int cellSizeY, int boardWidth, int boardHeight, int windowX, int windowY, olc::PixelGameEngine* pge) :
 		cellSizeX{ cellSizeX }, cellSizeY{ cellSizeY }, boardWidth{ boardWidth }, boardHeight{ boardHeight }, windowX{ windowX }, windowY{ windowY }, boardPosX{ 0 }, boardPosY{ 0 }, pge {pge}

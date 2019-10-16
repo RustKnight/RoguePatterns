@@ -8,7 +8,6 @@
 #include "InputHandler.h"
 #include "Strategy.h"
 #include "Ai.h"
-#include "Map.h"
 
 // add weapons of different attack values (Ex: Axe +2, Sword +1, etc. - naming will just be flavor for now)
 // add ability for players to pick up different weapons and be able to exchange them when desired
@@ -28,10 +27,6 @@ class Demo : public olc::PixelGameEngine
 public:
 	Demo() : winsizeX {800}, winsizeY {600}, 
 		board	(25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
-		player	(std::string	{ "Knight" }, 'K', Point{ 5, 5 }, olc::YELLOW, this),
-		enemy	(std::string	{ "Lurker" }, 'Z', Point{ 6, 5 }, olc::RED, this),
-		axe		(this),
-		sword	(this),
 		inputHandler (this)
 	{
 		sAppName = "Demo";
@@ -40,31 +35,19 @@ public:
 public:
 	bool OnUserCreate() override
 	{
-		//axe.assignRandomBoardPosition();
-		//sword.assignRandomBoardPosition();
-		//player.assignRandomBoardPosition();
-		//enemy.assignRandomBoardPosition();
-
-		player.equip(&sword);
-		enemy.equip(&axe);
-
-		player.attack(enemy);
-		cout << endl;
-		enemy.attack(player);
-
-		map.addThing(&axe);
-		map.addThing(&sword);
-		map.addThing(&player);
-		map.addThing(&enemy);
+			
 
 		return true;
 	}
+
+
 
 	bool OnUserUpdate(float fElapsedTime) override
 	{
 	
 		Clear(olc::BLACK);
 		{
+
 			if (GetMouseWheel() > 0) {
 				board.cellSizeX++;
 				board.cellSizeY++;
@@ -80,22 +63,20 @@ public:
 		}
 
 		board.drawBoard();
-
-		Command* inputAction = inputHandler.handleInput();
-		if (inputAction) inputAction->execute(player);
-		
-		// for each enemy in enemies array use ai module for them to make them act
-
-		Command* doThis = ai.control(enemy);
-		if (inputAction && doThis) doThis->execute(enemy);
 			
+
+
+
+
 	
 		// board will call the draw routing
-		for (Thing* thing : map.vThings)
+		for (Thing* thing : vpThings)
 			board.drawThing(*thing);
 
 		return true;
 	}
+
+
 
 
 	// Demo public methods
@@ -110,16 +91,12 @@ private:
 	int winsizeY;
 
 	Board board;
-	Map map;
 	Ai ai;
 
-	Creature player;
-	Creature enemy;
+	vector<Thing*>vpThings;
+
 	InputHandler inputHandler;
 
-	//weapons
-	Sword sword;
-	Axe axe;
 };
 
 
