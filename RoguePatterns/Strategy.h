@@ -17,6 +17,8 @@ public:
 	virtual void apply(Thing& attacker, Thing& target) = 0;
 	virtual ~Weapon() = default;
 
+
+
 protected:
 	int damage;
 };
@@ -29,13 +31,19 @@ public:
 	{
 		name = "axe";
 		avatar = '$';
-		color = olc::DARK_CYAN;		
+		color = olc::DARK_GREY;
 	}
 
 
 	void apply(Thing& attacker, Thing& target) override {
-		cout << attacker.getName() << " hacks " << target.getName() << " with his + " << damage << name << "!";
+		cout << attacker.getName() << " hacks " << target.getName() << " with his +" << damage << " " << name << "!\n";
 	}
+
+
+	void act() {};
+	void collide(Thing& wall) {};
+	void attack(Thing& target) {};
+	bool isObstacle() { return false; };
 };
 
 
@@ -46,11 +54,16 @@ public:
 	{
 		name = "sword";
 		avatar = '!';
-		color = olc::DARK_CYAN;
+		color = olc::DARK_GREY;
 	}
 
 
 	void apply(Thing& attacker, Thing& target) override {
-		cout << attacker.getName() << " slashes " << target.getName() << " with his + " << damage << name << "!";
+		cout << attacker.getName() << " slashes " << target.getName() << " with his +" << damage << " " << name << "!\n";
 	}
+
+	void act() {};
+	void collide(Thing& wall) {};
+	void attack(Thing& target) {};
+	bool isObstacle() { return false; };
 };

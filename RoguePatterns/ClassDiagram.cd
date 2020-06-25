@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Creature">
+    <Position X="2" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAACAAAAAAAAAAAgDAAIABCAAABAIgEAgAA=</HashCode>
+      <FileName>Creature.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command" Collapsed="true">
+    <Position X="4.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAIAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Command.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Thing" Collapsed="true">
+    <Position X="2" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAYAAAAAAAAACAAAAAAICEAAAEAACAAAAEgAAAAAA=</HashCode>
+      <FileName>Thing.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="turnTaker" Collapsed="true">
+    <Position X="6.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACCAAAAIAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>turnTaker.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

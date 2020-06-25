@@ -13,6 +13,7 @@ public:
 		vCommands.push_back(new DownCommand);
 		vCommands.push_back(new LeftCommand);
 		vCommands.push_back(new RightCommand);
+		vCommands.push_back(new WaitCommand);
 	}
 
 

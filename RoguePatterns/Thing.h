@@ -3,8 +3,7 @@
 #include "Point.h"
 #include <string>
 
-class InteractionHandler;
-
+class Command;
 
 class Thing {
 
@@ -17,11 +16,16 @@ public:
 	{}
 	
 
+	virtual void	 act()				     = 0;
+	virtual void	 collide (Thing& wall)	 = 0;
+	virtual void	 attack  (Thing& target) = 0;
+	virtual bool 	 isObstacle	 ()		     = 0;
+	// perish() -> marks thing for deletion
 
-	std::string getName() const { return name; }
-	Point getPosition() const { return pos; }
-	char getAvatar() const { return avatar; }
-	olc::Pixel getColor() const { return color; }
+	std::string getName()		const { return name; }
+	Point		getPosition()	const { return pos; }
+	char		getAvatar()		const { return avatar; }
+	olc::Pixel	getColor()		const { return color; }
 
 
 

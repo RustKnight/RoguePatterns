@@ -14,8 +14,15 @@ public:
 		buttonDown	= new DownCommand;
 		buttonLeft	= new LeftCommand;
 		buttonRight = new RightCommand;
-	}
+		skipTurn	= new WaitCommand;
 
+	}
+	
+	void takeOverCreature(Creature* creature);
+	void controlCreature();
+
+
+private:
 	Command* handleInput();
 
 
@@ -24,6 +31,10 @@ private:
 	Command* buttonDown;
 	Command* buttonLeft;
 	Command* buttonRight;
+	Command* skipTurn;
+
+
+	Creature* controlledCreature;
 	
 	olc::PixelGameEngine* pge;
 };
