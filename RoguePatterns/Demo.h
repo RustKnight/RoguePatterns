@@ -10,6 +10,7 @@
 #include "Ai.h"
 #include "InteractionHandler.h"
 #include "Obstacle.h"
+#include "map.h"
 
 #include <vector>
 #include <typeinfo>
@@ -20,6 +21,17 @@
 // make an AI that always is on a look out for a best weapon, and when possible it swaps it
 // action text will be outputed in the command line
 
+
+
+// ai has different behaviour : pursue, run away, keep distance (find weapon, find health)
+	// similar to commands, ai will choose these behaviours, based on his stats and surroundings. 
+	// then, these behaviours will be implemented based on the game's current state/algorithm
+// ai logic will be based on a behaviour interface as described above
+
+
+// make the world understand grids. grids can be empty or hold things
+	// ai and interactionHandler will be use of this container
+	// ai can scan based on his location, his surroundings 
 
 
 // 1 action = 1 move ; all creatures have 1 move per turn
@@ -38,7 +50,8 @@ class Demo : public olc::PixelGameEngine
 public:
 	Demo() : winsizeX {800}, winsizeY {600}, 
 		board	(25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
-		
+		map (board),
+		interactionHandler(map),
 		inputHandler (this)
 	{
 		sAppName = "Demo";
@@ -48,7 +61,7 @@ public:
 	bool OnUserCreate() override
 	{
 
-		Creature* knight = new Creature("Knight", 'K', { 0,0 }, olc::DARK_RED, &interactionHandler, this);
+		Creature* knight = new Creature("Knight", 'K', { 10,5 }, olc::DARK_RED, &interactionHandler, this);
 		knight->equip(new Sword(this));
 		vpThings.push_back(knight);
 
@@ -56,25 +69,35 @@ public:
 		fiend->equip(new Axe(this));
 		vpThings.push_back(fiend);
 
-		for (int x = -1; x < 26; ++x)
-			for (int y = -1; y < 16; ++y) {
+		for (int x = 0; x < 25; ++x)
+			for (int y = 0; y < 15; ++y) {
 
-				// left side
-				if (x == -1)
+				// left border
+				if (x == 0)
 					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
 
-				// right side
-				if (x == 25)
+				// right border
+				if (x == 24)
 					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
 
-				// top side
-				if (x != -1 && y == -1)
+				// top border
+				if (x != 0 && y == 0)
 					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
 
-				// bottom side
-				if (x != -1 && y == 15)
+				// bottom border
+				if (x != 0 && y == 14)
 					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
 			}
+
+		for (int i = 0; i < 20; ++i) {
+
+			int x = rand() % 26;
+			int y = rand() % 16;
+
+			vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
+		}
+
+		
 
 		inputHandler.takeOverCreature(static_cast<Creature*>(knight));
 		return true;
@@ -102,11 +125,10 @@ public:
 				board.toggleGrid();
 		}
 
+
 		board.drawBoard();
 
-		// update interactionHandler
-		interactionHandler.update(vpThings);
-			
+		map.update(vpThings);
 
 		inputHandler.controlCreature();
 
@@ -146,6 +168,7 @@ private:
 
 	InteractionHandler interactionHandler;
 	Board board;
+	Map map;
 	Ai ai;
 
 	vector<Thing*>vpThings;

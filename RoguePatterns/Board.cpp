@@ -15,22 +15,22 @@ void Board::centerBoard()
 void Board::drawEdges()
 {
 	const int edgeWidth = 25;
-	int boardPixelWidth = boardWidth * cellSizeX;
-	int boardPixelHeight = boardHeight * cellSizeY;
+	int boardPixelWidth = boardWidth	* cellSizeX;
+	int boardPixelHeight = boardHeight	* cellSizeY;
 
-	Point topLeftCorner			{ boardPosX - edgeWidth, boardPosY - edgeWidth };
-	Point topRightCorner		{ boardPosX + boardPixelWidth + 1, boardPosY - edgeWidth };
-	Point bottomLeftCorner		{ boardPosX - edgeWidth, boardPosY + boardPixelHeight + 1 };
+	Point topLeftCorner			{ boardPosX - edgeWidth,			boardPosY - edgeWidth };
+	Point topRightCorner		{ boardPosX + boardPixelWidth + 1,	boardPosY - edgeWidth };
+	Point bottomLeftCorner		{ boardPosX - edgeWidth,			boardPosY + boardPixelHeight + 1 };
 
 	// left edge
-	pge->FillRect(topLeftCorner.x, topLeftCorner.y, edgeWidth, boardPixelHeight + edgeWidth * 2, olc::VERY_DARK_GREY);
+	pge->FillRect(topLeftCorner.x, topLeftCorner.y, edgeWidth, boardPixelHeight + edgeWidth * 2, olc::VERY_DARK_RED);
 	// top edge
-	pge->FillRect(topLeftCorner.x, topLeftCorner.y, boardPixelWidth + edgeWidth * 2, edgeWidth, olc::VERY_DARK_GREY);	
+	pge->FillRect(topLeftCorner.x, topLeftCorner.y, boardPixelWidth + edgeWidth * 2, edgeWidth, olc::VERY_DARK_RED);
 	
 	// right edge
-	pge->FillRect(topRightCorner.x, topRightCorner.y, edgeWidth, boardPixelHeight + edgeWidth * 2, olc::VERY_DARK_GREY);
+	pge->FillRect(topRightCorner.x, topRightCorner.y, edgeWidth, boardPixelHeight + edgeWidth * 2, olc::VERY_DARK_RED);
 	// bottom edge
-	pge->FillRect(bottomLeftCorner.x, bottomLeftCorner.y, boardPixelWidth + edgeWidth * 2, edgeWidth, olc::VERY_DARK_GREY);
+	pge->FillRect(bottomLeftCorner.x, bottomLeftCorner.y, boardPixelWidth + edgeWidth * 2, edgeWidth, olc::VERY_DARK_RED);
 }
 
 
@@ -45,7 +45,7 @@ void Board::drawBoard()
 				pge->DrawRect(w, h, cellSizeX, cellSizeY, olc::DARK_GREY);
 	}
 
-	drawEdges();	
+	//drawEdges();	
 }
 
 void Board::drawThing(const Thing& thing) const
@@ -54,7 +54,7 @@ void Board::drawThing(const Thing& thing) const
 	Point positionOnScreen{ boardPosX + thing.getPosition().x * cellSizeX, boardPosY + thing.getPosition().y * cellSizeY };
 	Point centeredPos = centerSymbolInCell (positionOnScreen);
 
-	pge->FillRect(positionOnScreen.x, positionOnScreen.y, cellSizeX, cellSizeY, olc::VERY_DARK_GREY);
+	pge->FillRect(positionOnScreen.x, positionOnScreen.y, cellSizeX + 1, cellSizeY +1, olc::VERY_DARK_GREY);
 	pge->DrawString(centeredPos.x, centeredPos.y, std::string(1, thing.getAvatar()), thing.getColor(), symbolSize);
 
 }

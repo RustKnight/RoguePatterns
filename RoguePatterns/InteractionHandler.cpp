@@ -1,37 +1,33 @@
 #include "InteractionHandler.h"
 
-void InteractionHandler::addThing(Thing* thing)
-{
-	vThings.push_back(thing);
-}
+
 
 void InteractionHandler::handleAction(Thing* requester, Command* command)
 {
 
-	// determine direction of movement
+	// determine intended direction
 
 	Point upcomingPosition = requester->getPosition();
 	upcomingPosition += command->direction();
+
 	bool noInteraction = true;
 
-	for (Thing* bumpedThing : vThings) {
+	Cell& cell = map.checkCell(upcomingPosition);
 
-		// skip requester
-		if (bumpedThing == requester)
-			continue;
 
 		// we bumped into something
-		if (upcomingPosition == bumpedThing->getPosition()) {
+		if (cell.thing != nullptr && cell.thing != requester) {
 
-			if (bumpedThing->isObstacle())
-				requester->collide(*bumpedThing);
+			Thing& bumpedThing = *cell.thing;
+
+			if (bumpedThing.isObstacle())
+				requester->collide(bumpedThing);
 			else
-				requester->attack(*bumpedThing);
+				requester->attack(bumpedThing);
 
 			noInteraction = false;
-			break;	
 		}
-	}
+	
 
 	//assume we're dealing with creatures
 	if (noInteraction)
@@ -40,7 +36,3 @@ void InteractionHandler::handleAction(Thing* requester, Command* command)
 
 }
 
-void InteractionHandler::update(const std::vector<Thing*>& vec)
-{
-	vThings = vec;
-}
