@@ -47,9 +47,6 @@
     <ClInclude Include="Ai.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Food.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Demo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -83,9 +80,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Ai.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Food.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="turnTaker.cpp">

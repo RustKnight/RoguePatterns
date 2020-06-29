@@ -5,8 +5,17 @@
 Command* Ai::control(const Thing& thing)
 {
 
-	return vCommands[rand() % 5];
-	
-	//wait command
-	return vCommands[4];
+
+}
+
+void Ai::controlCreatures()
+{
+
+	for (Thing* unit : vUnits) {
+
+		unit.vCommands[rand() % 5];
+
+	}
+
+
 }

@@ -23,11 +23,6 @@
 
 
 
-// ai has different behaviour : pursue, run away, keep distance (find weapon, find health)
-	// similar to commands, ai will choose these behaviours, based on his stats and surroundings. 
-	// then, these behaviours will be implemented based on the game's current state/algorithm
-// ai logic will be based on a behaviour interface as described above
-
 
 // make the world understand grids. grids can be empty or hold things
 	// ai and interactionHandler will be use of this container
@@ -41,8 +36,14 @@
 // teams
 
 // bump on enemy		= means attack
-
 // bump on friendly		= remain on original postion 
+
+// animations / physics 
+
+//TODO: fix main loop 
+			// - teams
+			// - possibly add turns system
+			// - accomodate implementation of animations
 
 
 class Demo : public olc::PixelGameEngine

@@ -4,11 +4,11 @@
 #include <vector>
 
 
-class turnTaker
+class TurnTaker
 {
 public:
 
-	turnTaker(std::vector<Creature*> vec) : creaturesInPlay {vec}
+	TurnTaker(std::vector<Creature*> vec) : creaturesInPlay {vec}
 	{}
 
 	void playTurn() const;
