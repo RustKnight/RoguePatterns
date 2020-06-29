@@ -161,6 +161,7 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="Creature.h" />
     <ClInclude Include="Demo.h" />
+    <ClInclude Include="IDecisionTaker.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InteractionHandler.h" />
     <ClInclude Include="map.h" />

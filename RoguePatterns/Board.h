@@ -20,6 +20,7 @@ public:
 
 	
 
+	void drawTurnNotifier(Thing* thing);
 	void drawBoard();
 	void drawThing(const Thing& thing) const;
 	void toggleGrid();

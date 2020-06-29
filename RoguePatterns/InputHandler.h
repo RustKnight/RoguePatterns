@@ -1,10 +1,12 @@
 #pragma once
 
+#include "IDecisionTaker.h"
+
 #include "Command.h"
 #include "olcPixelGameEngine.h"
 
 
-class InputHandler {
+class InputHandler : public IDecisionTaker {
 public:
 
 	InputHandler(olc::PixelGameEngine* pge) :
@@ -18,12 +20,9 @@ public:
 
 	}
 	
-	void takeOverCreature(Creature* creature);
-	void controlCreature();
 
 
-private:
-	Command* handleInput();
+	Command* decideAction(Creature* caller) override;
 
 
 private:
@@ -33,8 +32,6 @@ private:
 	Command* buttonRight;
 	Command* skipTurn;
 
-
-	Creature* controlledCreature;
 	
 	olc::PixelGameEngine* pge;
 };

@@ -20,6 +20,9 @@ public:
 	virtual void	 collide (Thing& wall)	 = 0;
 	virtual void	 attack  (Thing& target) = 0;
 	virtual bool 	 isObstacle	 ()		     = 0;
+
+	virtual bool	 isDone() = 0;
+
 	// perish() -> marks thing for deletion
 
 	std::string getName()		const { return name; }

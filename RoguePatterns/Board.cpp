@@ -34,6 +34,13 @@ void Board::drawEdges()
 }
 
 
+void Board::drawTurnNotifier(Thing* thing)
+{
+
+	pge->DrawRect(boardPosX + thing->getPosition().x * cellSizeX, boardPosX + (thing->getPosition().y +1) * cellSizeX, cellSizeX + 1, cellSizeY + 1, olc::RED);
+
+}
+
 void Board::drawBoard()
 {
 

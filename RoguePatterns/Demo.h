@@ -11,6 +11,7 @@
 #include "InteractionHandler.h"
 #include "Obstacle.h"
 #include "map.h"
+#include "turnTaker.h"
 
 #include <vector>
 #include <typeinfo>
@@ -53,7 +54,8 @@ public:
 		board	(25, 25, 25, 15, getWinWidth(), getWinHeight(), this),
 		map (board),
 		interactionHandler(map),
-		inputHandler (this)
+		playerInput (this),
+		turnTaker (vpThings)
 	{
 		sAppName = "Demo";
 	}
@@ -62,11 +64,11 @@ public:
 	bool OnUserCreate() override
 	{
 
-		Creature* knight = new Creature("Knight", 'K', { 10,5 }, olc::DARK_RED, &interactionHandler, this);
+		Creature* knight = new Creature("Knight", 'K', { 10,5 }, olc::DARK_RED, &interactionHandler, &playerInput,  this);
 		knight->equip(new Sword(this));
 		vpThings.push_back(knight);
 
-		Creature* fiend = new Creature("Fiend", 'F', { 5,5 }, olc::DARK_MAGENTA, &interactionHandler, this);
+		Creature* fiend = new Creature("Fiend", 'F', { 5,5 }, olc::DARK_MAGENTA, &interactionHandler, &ai, this);
 		fiend->equip(new Axe(this));
 		vpThings.push_back(fiend);
 
@@ -99,8 +101,6 @@ public:
 		}
 
 		
-
-		inputHandler.takeOverCreature(static_cast<Creature*>(knight));
 		return true;
 	}
 
@@ -127,28 +127,24 @@ public:
 		}
 
 
-		board.drawBoard();
+		actorSwitchDEBUG();
 
+
+		turnTaker.update(vpThings);
 		map.update(vpThings);
 
-		inputHandler.controlCreature();
 
-
-		// keep skiping until button was pressed 
-		if (static_cast<Creature*>(vpThings[0])->isDecided()) {
-
-			vpThings[0]->act();
-
-			static_cast<Creature*>(vpThings[1])->setIntetion(ai.control(*vpThings[1]));
-			vpThings[1]->act();
-		}
-
+		turnTaker.handleTurns();
 		
 
-	
-		// board will call the draw routing
+		board.drawBoard();
+
+
 		for (Thing* thing : vpThings)
 			board.drawThing(*thing);
+
+
+		board.drawTurnNotifier(turnTaker.whoPlaysNow());
 
 		return true;
 	}
@@ -161,6 +157,13 @@ public:
 	int getWinWidth() const		{ return winsizeX; };
 	int getWinHeight() const	{ return winsizeY; };
 
+	void actorSwitchDEBUG()    {
+
+		if (this->GetKey(olc::L).bHeld)
+			static_cast<Creature*> (vpThings[0])->switchPossesor(&ai);
+		else
+			static_cast<Creature*> (vpThings[0])->switchPossesor(&playerInput);
+	}
 
 	// Demo private data members
 private:
@@ -173,7 +176,9 @@ private:
 	Ai ai;
 
 	vector<Thing*>vpThings;
-	InputHandler inputHandler;
+	InputHandler playerInput;
+
+	TurnTaker turnTaker;
 	
 
 };

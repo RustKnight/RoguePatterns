@@ -1,19 +1,17 @@
 #include "map.h"
 
-void Map::update(std::vector<Thing*> vec)
+void Map::update(const std::vector<Thing*> vec)
 {
 
 	clearThings();
 
 	for (Thing* thing : vec) {
 
-		// get Pos
+
 		const Point p = thing->getPosition();
 
-		// access the 1D array based on Pos
 		Cell& cell = vCells[p.y * boardWidth + p.x];
 
-		// write cell thing pointer
 		cell.thing = thing;
 	}
 }

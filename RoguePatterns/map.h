@@ -28,7 +28,7 @@ public:
 	}
 
 
-	void update(std::vector<Thing*> vec);
+	void update(const std::vector<Thing*> vec);
 	
 	Cell& checkCell(Point p);
 	

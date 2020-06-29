@@ -2,20 +2,20 @@
 
 
 
-Command* Ai::control(const Thing& thing)
+Command* Ai::decideAction(Creature* caller)
 {
 
-
+	return vCommands[rand() % 5];
 }
 
 void Ai::controlCreatures()
 {
 
-	for (Thing* unit : vUnits) {
-
-		unit.vCommands[rand() % 5];
-
-	}
+	//for (Thing* unit : vUnits) {
+	//
+	//	unit.vCommands[rand() % 5];
+	//
+	//}
 
 
 }

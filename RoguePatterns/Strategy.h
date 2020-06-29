@@ -44,6 +44,7 @@ public:
 	void collide(Thing& wall) {};
 	void attack(Thing& target) {};
 	bool isObstacle() { return false; };
+	bool isDone() { return true; }
 };
 
 
@@ -66,4 +67,5 @@ public:
 	void collide(Thing& wall) {};
 	void attack(Thing& target) {};
 	bool isObstacle() { return false; };
+	bool isDone() { return true; }
 };

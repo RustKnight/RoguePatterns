@@ -10,15 +10,18 @@
 
 class Weapon;
 class InteractionHandler;
+class IDecisionTaker;
 
 class Creature : public Thing{
 
 public:
 
-	Creature (std::string name, char avatar, Point pos, olc::Pixel color, InteractionHandler* interact, olc::PixelGameEngine* pge):
+	Creature(std::string name, char avatar, Point pos, olc::Pixel color, InteractionHandler* interact, IDecisionTaker* possesor, olc::PixelGameEngine* pge) :
+		
+		intention {nullptr},
+		mind { possesor },
 		interactionHandler {interact},
 		Thing (name, avatar, pos, color, pge),
-		intention { nullptr },
 		weapon {nullptr},
 		hp {10},
 		alive {true}
@@ -28,10 +31,10 @@ public:
 	void attack(Thing& target) override;
 	void collide(Thing& target) override;
 	bool isObstacle() override;
+	bool isDone() override;
 
-	bool isDecided();
+	void switchPossesor(IDecisionTaker* newPossesor);
 
-	void setIntetion(Command* command);
 	void equip(Weapon* weapon);
 
 	void up();
@@ -44,8 +47,9 @@ public:
 	bool isAlive();
 
 private:
-	InteractionHandler* interactionHandler;
 	Command* intention;
+	IDecisionTaker* mind;
+	InteractionHandler* interactionHandler;
 	Weapon* weapon;
 	int hp;
 	bool alive;

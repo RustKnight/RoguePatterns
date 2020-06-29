@@ -4,6 +4,8 @@
 #include "map.h"
 #include <vector>
 
+#include "IDecisionTaker.h"
+
 // ai has different behaviour : pursue, run away, keep distance (find weapon, find health)
 
 	// similar to commands, ai will choose these behaviours, based on his stats and surroundings. 
@@ -12,7 +14,7 @@
 
 
 
-class Ai {
+class Ai : public IDecisionTaker {
 public:
 
 	Ai()
@@ -25,7 +27,7 @@ public:
 	}
 
 
-	Command* control(const Thing& thing);
+	Command* decideAction(Creature* caller) override;
 	void controlCreatures();
 
 	void selectBehaviour();

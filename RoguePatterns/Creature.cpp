@@ -1,20 +1,21 @@
 #include "Creature.h"
 #include "InteractionHandler.h"
-
+#include "IDecisionTaker.h"
 
 
 
 void Creature::act()
 {
 
+
+	// maybe break act() into 2 functions: 
+		// decideAction and animate, and depending on the creature state (acting - animating), the correct func. will be called
+
+	intention = mind->decideAction(this);
+
+	if (intention == nullptr) return;
+
 	interactionHandler->handleAction(this, intention);
-
-}
-
-void Creature::setIntetion(Command* command)
-{
-
-	intention = command;
 
 }
 
@@ -40,10 +41,16 @@ bool Creature::isObstacle()
 	return false;
 }
 
-bool Creature::isDecided()
+bool Creature::isDone()
 {
 	return intention != nullptr;
 }
+
+void Creature::switchPossesor(IDecisionTaker* newPossesor)
+{
+	mind = newPossesor;
+}
+
 
 void Creature::up()
 {
