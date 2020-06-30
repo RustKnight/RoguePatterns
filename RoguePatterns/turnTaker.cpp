@@ -12,17 +12,13 @@ void TurnTaker::update(std::vector<Thing*> vec)
 
 void TurnTaker::handleTurns()
 {
-
 	Thing* playingThing = vThings[turnID];
-
-
+		
 
 	playingThing->act();
 
-	if (playingThing->isDone())
-		nextCreature();
+	if (playingThing->isDone()) nextCreature();
 	
-
 }
 
 Thing* TurnTaker::whoPlaysNow() const
@@ -41,6 +37,9 @@ void TurnTaker::nextCreature()
 			turnID++;
 	}
 
-	else
+	else {
+
 		turnID = 0;
+		//roundCounter++;
+	}
 }

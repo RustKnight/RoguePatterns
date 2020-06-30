@@ -20,6 +20,7 @@ void InteractionHandler::handleAction(Thing* requester, Command* command)
 
 			Thing& bumpedThing = *cell.thing;
 
+
 			if (bumpedThing.isObstacle())
 				requester->collide(bumpedThing);
 			else

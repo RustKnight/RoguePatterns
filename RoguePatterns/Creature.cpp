@@ -7,11 +7,10 @@
 void Creature::act()
 {
 
-
 	// maybe break act() into 2 functions: 
 		// decideAction and animate, and depending on the creature state (acting - animating), the correct func. will be called
 
-	intention = mind->decideAction(this);
+	intention = possessor->decideAction(this);
 
 	if (intention == nullptr) return;
 
@@ -29,11 +28,18 @@ void Creature::equip(Weapon* weapon)
 void Creature::attack(Thing& target)
 {
 	weapon->apply(*this, target);
+
+	// additional check if 
+		// we managed to throw them in the air
+		// how many tiles is he flying
+		// a thing func. target.getThrown(int cellDistance) is called onto arg. target (see function signature)
 }
 
 void Creature::collide(Thing& target)
 {
 	cout << this->getName() << " slams into a " << target.getName() << "!\n";
+
+	// both the colidee and colider take damage
 }
 
 bool Creature::isObstacle()
@@ -43,12 +49,12 @@ bool Creature::isObstacle()
 
 bool Creature::isDone()
 {
-	return intention != nullptr;
+	return intention != nullptr; // and animation finished playing
 }
 
 void Creature::switchPossesor(IDecisionTaker* newPossesor)
 {
-	mind = newPossesor;
+	possessor = newPossesor;
 }
 
 

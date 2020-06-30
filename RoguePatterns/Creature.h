@@ -16,10 +16,10 @@ class Creature : public Thing{
 
 public:
 
-	Creature(std::string name, char avatar, Point pos, olc::Pixel color, InteractionHandler* interact, IDecisionTaker* possesor, olc::PixelGameEngine* pge) :
+	Creature(std::string name, char avatar, Point pos, olc::Pixel color, InteractionHandler* interact, IDecisionTaker* possessor, olc::PixelGameEngine* pge) :
 		
 		intention {nullptr},
-		mind { possesor },
+		possessor { possessor },
 		interactionHandler {interact},
 		Thing (name, avatar, pos, color, pge),
 		weapon {nullptr},
@@ -48,7 +48,7 @@ public:
 
 private:
 	Command* intention;
-	IDecisionTaker* mind;
+	IDecisionTaker* possessor;
 	InteractionHandler* interactionHandler;
 	Weapon* weapon;
 	int hp;

@@ -25,10 +25,10 @@ public:
 
 	// perish() -> marks thing for deletion
 
-	std::string getName()		const { return name; }
-	Point		getPosition()	const { return pos; }
-	char		getAvatar()		const { return avatar; }
-	olc::Pixel	getColor()		const { return color; }
+	std::string getName()		const { return name;	}
+	Point		getPosition()	const { return pos;		}
+	char		getAvatar()		const { return avatar;	}
+	olc::Pixel	getColor()		const { return color;	}
 
 
 

@@ -46,6 +46,17 @@
 			// - possibly add turns system
 			// - accomodate implementation of animations
 
+// a creature that is thrown should not care about map. It should go along its path and it's interactionHandlers job to monitor if it collides or not.
+// if thrown creature stops, but it still had travel distance, it will take damage depending on how much travel dist. was left
+// if a thrown action occurs, turnTaker should stop normal flow of turn and resolve thrown object. Then resume normal order.
+
+// animation for creature fragging that is hit against a wall (letter sign disappears and multiple other '&' signs jump randomly around)
+	// maybe have a function in creature called explode() -> how can Creature affect state of world? needs to create other flying entities
+	// have a class exploder that can explode objects (isolate flyThrough algorithm for improvement)
+
+// Animation definition: ...
+// when a thing is in the state of animation, it sort of stops the turn of all other things, until that animation is finished
+	// if several things are in animation state they will resolve their animation first before other things
 
 class Demo : public olc::PixelGameEngine
 {
@@ -133,6 +144,7 @@ public:
 		turnTaker.update(vpThings);
 		map.update(vpThings);
 
+		// check and resolve animations first, if any
 
 		turnTaker.handleTurns();
 		

@@ -12,7 +12,7 @@ class TurnTaker
 {
 public:
 
-	TurnTaker(std::vector<Thing*> vec) : vThings{vec}, turnID {0}
+	TurnTaker(std::vector<Thing*> vec) : vThings{vec}, turnID {0}//, roundCounter {0}
 	{}
 
 	void update(std::vector<Thing*> vec);
@@ -27,6 +27,7 @@ private:
 private:
 
 	int turnID;
+	//int roundCounter;
 	std::vector<Thing*> vThings;
 
 };
