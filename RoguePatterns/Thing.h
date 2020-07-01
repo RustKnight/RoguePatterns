@@ -2,17 +2,36 @@
 #include"olcPixelGameEngine.h"
 #include "Point.h"
 #include <string>
+#include "Physics.h"
 
-class Command;
+
+class InteractionHandler;
 
 class Thing {
 
+
 public:
-	Thing(olc::PixelGameEngine* pge):
-		pge {pge}, avatar{'o'}, pos {0,0}, color {olc::GREEN}, name {"DefaultName"}
+
+	Thing(olc::PixelGameEngine* pge, float* fElapsedTime) :
+		pge{ pge }, 
+		avatar{ 'o' }, 
+		pos{ 0,0 }, 
+		color{ olc::GREEN }, 
+		name{ "DefaultName" },
+		physics{ *this },
+		fElapsedTime { fElapsedTime }
 	{}
-	Thing(std::string name, char avatar, Point pos, olc::Pixel color, olc::PixelGameEngine* pge) :
-		name{ name }, avatar{ avatar }, pos{ pos }, color{ color }, pge{ pge }
+
+
+	Thing(std::string name, char avatar, Point pos, olc::Pixel color, InteractionHandler* interactionHandler, float* fElapsedTime, olc::PixelGameEngine* pge) :
+		name{ name }, 
+		avatar{ avatar }, 
+		pos{ pos }, 
+		color{ color }, 
+		interactionHandler{ interactionHandler }, 
+		pge{ pge },
+		physics {*this},
+		fElapsedTime { fElapsedTime }
 	{}
 	
 
@@ -23,7 +42,9 @@ public:
 
 	virtual bool	 isDone() = 0;
 
-	// perish() -> marks thing for deletion
+	virtual void	 takeDamage(int dmg) = 0;
+
+	//virtual void	 perish() -> marks thing for deletion
 
 	std::string getName()		const { return name;	}
 	Point		getPosition()	const { return pos;		}
@@ -37,6 +58,11 @@ protected:
 	Point pos;
 	char avatar;
 	olc::Pixel color;
-
 	olc::PixelGameEngine* pge;
+
+public:
+	float* fElapsedTime;
+	Physics physics;
+	InteractionHandler* interactionHandler;
 };
+

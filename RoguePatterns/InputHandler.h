@@ -17,7 +17,6 @@ public:
 		buttonLeft	= new LeftCommand;
 		buttonRight = new RightCommand;
 		skipTurn	= new WaitCommand;
-
 	}
 	
 

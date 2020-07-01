@@ -10,7 +10,7 @@ void Map::update(const std::vector<Thing*> vec)
 
 		const Point p = thing->getPosition();
 
-		Cell& cell = vCells[p.y * boardWidth + p.x];
+		Cell& cell = vCells[(int)p.y * boardWidth + (int)p.x];
 
 		cell.thing = thing;
 	}
@@ -18,7 +18,7 @@ void Map::update(const std::vector<Thing*> vec)
 
 Cell& Map::checkCell(Point p)
 {
-	return vCells[p.y * boardWidth + p.x];
+	return vCells[(int)p.y * boardWidth + (int)p.x];
 }
 
 void Map::clearThings()

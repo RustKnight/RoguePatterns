@@ -17,6 +17,7 @@ void TurnTaker::handleTurns()
 
 	playingThing->act();
 
+	// next turn only after physics is done from moving from A to B (i.e
 	if (playingThing->isDone()) nextCreature();
 	
 }

@@ -6,6 +6,8 @@ Command* Ai::decideAction(Creature* caller)
 {
 
 	return vCommands[rand() % 5];
+
+	//return vCommands[4];
 }
 
 void Ai::controlCreatures()

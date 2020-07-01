@@ -58,7 +58,7 @@ void Board::drawBoard()
 void Board::drawThing(const Thing& thing) const
 {
 
-	Point positionOnScreen{ boardPosX + thing.getPosition().x * cellSizeX, boardPosY + thing.getPosition().y * cellSizeY };
+	Point positionOnScreen{ boardPosX + (int)thing.getPosition().x * cellSizeX, boardPosY + (int)thing.getPosition().y * cellSizeY };
 	Point centeredPos = centerSymbolInCell (positionOnScreen);
 
 	pge->FillRect(positionOnScreen.x, positionOnScreen.y, cellSizeX + 1, cellSizeY +1, olc::VERY_DARK_GREY);

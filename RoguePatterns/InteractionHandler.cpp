@@ -27,6 +27,8 @@ void InteractionHandler::handleAction(Thing* requester, Command* command)
 				requester->attack(bumpedThing);
 
 			noInteraction = false;
+
+			requester->physics.calculateCollision();
 		}
 	
 

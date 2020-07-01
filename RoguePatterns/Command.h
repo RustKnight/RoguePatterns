@@ -28,7 +28,25 @@ public:
 
 		return { 0, -1 };
 	}
+
+
 };
+
+
+class ThrownUpCommand : public Command {
+
+public:
+
+	void execute(Creature& creature) override {
+		creature.thrownUp();
+	}
+
+	Point direction() override {
+
+		return { 0, -1 };
+	}
+};
+
 
 
 
@@ -38,6 +56,21 @@ public:
 
 	void execute(Creature& creature) override {
 		creature.down();
+	}
+
+	Point direction() override {
+
+		return { 0, 1 };
+	}
+};
+
+
+class ThrownDownCommand : public Command {
+
+public:
+
+	void execute(Creature& creature) override {
+		creature.thrownDown();
 	}
 
 	Point direction() override {
@@ -63,6 +96,20 @@ public:
 };
 
 
+class ThrownLeftCommand : public Command {
+
+public:
+
+	void execute(Creature& creature) override {
+		creature.thrownLeft();
+	}
+
+	Point direction() override {
+
+		return { -1, 0 };
+	}
+};
+
 
 
 class RightCommand : public Command {
@@ -71,6 +118,22 @@ public:
 
 	void execute(Creature& creature) override {
 		creature.right();
+	}
+
+	Point direction() override {
+
+		return { 1, 0 };
+	}
+};
+
+
+
+class ThrownRightCommand : public Command {
+
+public:
+
+	void execute(Creature& creature) override {
+		creature.thrownRight();
 	}
 
 	Point direction() override {

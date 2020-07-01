@@ -152,7 +152,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map.cpp" />
     <ClCompile Include="Obstacle.cpp" />
-    <ClCompile Include="Thing.cpp" />
+    <ClCompile Include="Physics.cpp" />
     <ClCompile Include="turnTaker.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +167,7 @@
     <ClInclude Include="map.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="olcPixelGameEngine.h" />
+    <ClInclude Include="Physics.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Strategy.h" />
     <ClInclude Include="Thing.h" />

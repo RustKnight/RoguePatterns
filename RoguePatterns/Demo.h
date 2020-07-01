@@ -75,32 +75,36 @@ public:
 	bool OnUserCreate() override
 	{
 
-		Creature* knight = new Creature("Knight", 'K', { 10,5 }, olc::DARK_RED, &interactionHandler, &playerInput,  this);
-		knight->equip(new Sword(this));
+		Creature* knight = new Creature("Knight", 'K', { 10,5 }, olc::DARK_RED, &interactionHandler, &playerInput, &fElapsedTime, this);
+		knight->equip(new Sword(this, &fElapsedTime));
 		vpThings.push_back(knight);
 
-		Creature* fiend = new Creature("Fiend", 'F', { 5,5 }, olc::DARK_MAGENTA, &interactionHandler, &ai, this);
-		fiend->equip(new Axe(this));
+		Creature* fiend = new Creature("Fiend", 'F', { 5,5 }, olc::DARK_MAGENTA, &interactionHandler, &ai, &fElapsedTime, this);
+		fiend->equip(new Axe(this, &fElapsedTime));
 		vpThings.push_back(fiend);
+
+		Creature* fiend2 = new Creature("Fiend2", 'F', { 0,5 }, olc::DARK_MAGENTA, &interactionHandler, &ai, &fElapsedTime, this);
+		fiend->equip(new Axe(this, &fElapsedTime));
+		vpThings.push_back(fiend2);
 
 		for (int x = 0; x < 25; ++x)
 			for (int y = 0; y < 15; ++y) {
 
 				// left border
 				if (x == 0)
-					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
+					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, &interactionHandler, &fElapsedTime, this));
 
 				// right border
 				if (x == 24)
-					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
+					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, &interactionHandler, &fElapsedTime, this));
 
 				// top border
 				if (x != 0 && y == 0)
-					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
+					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, &interactionHandler, &fElapsedTime, this));
 
 				// bottom border
 				if (x != 0 && y == 14)
-					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
+					vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, &interactionHandler, &fElapsedTime, this));
 			}
 
 		for (int i = 0; i < 20; ++i) {
@@ -108,7 +112,7 @@ public:
 			int x = rand() % 26;
 			int y = rand() % 16;
 
-			vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, this));
+			vpThings.push_back(new Obstacle("Wall", '@', { x,y }, olc::VERY_DARK_GREY, &interactionHandler, &fElapsedTime, this));
 		}
 
 		
@@ -119,6 +123,8 @@ public:
 
 	bool OnUserUpdate(float fElapsedTime) override
 	{
+
+		this->fElapsedTime = fElapsedTime;
 	
 		Clear(olc::BLACK);
 		{
@@ -137,7 +143,7 @@ public:
 				board.toggleGrid();
 		}
 
-
+		
 		actorSwitchDEBUG();
 
 
@@ -145,10 +151,21 @@ public:
 		map.update(vpThings);
 
 		// check and resolve animations first, if any
+		bool physicsPlaying = false;
 
-		turnTaker.handleTurns();
+		for (Thing* thing : vpThings) {
+
+			if (thing->physics.isBusy()) {
+
+				thing->physics.execute();
+				physicsPlaying = true;
+			}
+		}
+
+		if (!physicsPlaying)
+			turnTaker.handleTurns();
+
 		
-
 		board.drawBoard();
 
 
@@ -156,7 +173,7 @@ public:
 			board.drawThing(*thing);
 
 
-		board.drawTurnNotifier(turnTaker.whoPlaysNow());
+		//board.drawTurnNotifier(turnTaker.whoPlaysNow());
 
 		return true;
 	}
@@ -179,6 +196,9 @@ public:
 
 	// Demo private data members
 private:
+
+	float fElapsedTime;
+
 	int winsizeX;
 	int winsizeY;
 

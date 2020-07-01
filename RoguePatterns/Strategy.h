@@ -10,8 +10,8 @@ using namespace std;
 class Weapon : public Thing{
 public:
 	
-	Weapon(int dam, olc::PixelGameEngine* pge):
-		Thing(pge), damage{ dam }
+	Weapon(int dam, float* fElapsedTime, olc::PixelGameEngine* pge):
+		Thing(pge, fElapsedTime), damage{ dam }
 	{}
 
 	virtual void apply(Thing& attacker, Thing& target) = 0;
@@ -26,8 +26,8 @@ protected:
 
 class Axe : public Weapon {
 public:
-	Axe(olc::PixelGameEngine* pge):
-		Weapon (5, pge)
+	Axe(olc::PixelGameEngine* pge, float* fElapsedTime):
+		Weapon (5, fElapsedTime, pge)
 	{
 		name = "axe";
 		avatar = '$';
@@ -45,13 +45,14 @@ public:
 	void attack(Thing& target) {};
 	bool isObstacle() { return false; };
 	bool isDone() { return true; }
+	void	 takeDamage(int dmg)		override {};
 };
 
 
 class Sword : public Weapon {
 public:
-	Sword(olc::PixelGameEngine* pge) :
-		Weapon(2, pge)
+	Sword(olc::PixelGameEngine* pge, float* fElapsedTime) :
+		Weapon(2, fElapsedTime, pge)
 	{
 		name = "sword";
 		avatar = '!';
@@ -68,4 +69,5 @@ public:
 	void attack(Thing& target) {};
 	bool isObstacle() { return false; };
 	bool isDone() { return true; }
+	void	 takeDamage(int dmg)		override {};
 };
