@@ -27,7 +27,7 @@ public:
 	
 	void calculateCollision();
 	
-	bool isBusy();
+	bool hasWork();
 
 
 private:

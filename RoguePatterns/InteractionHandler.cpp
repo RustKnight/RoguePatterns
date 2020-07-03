@@ -14,6 +14,11 @@ void InteractionHandler::handleAction(Thing* requester, Command* command)
 
 	Cell& cell = map.checkCell(upcomingPosition);
 
+	// all entities should implement a bumped into function and is called here
+	// - walls make you bump, 
+	// - enteties resolve their relationship depending on each other's alligence
+	// - items allow to be moved on them
+	// - traps allow to be moved on them, but give damage
 
 		// we bumped into something
 		if (cell.thing != nullptr && cell.thing != requester) {
@@ -29,6 +34,7 @@ void InteractionHandler::handleAction(Thing* requester, Command* command)
 			noInteraction = false;
 
 			requester->physics.calculateCollision();
+			// bumpedThing should also check for collision;
 		}
 	
 

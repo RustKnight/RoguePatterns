@@ -49,6 +49,7 @@
 // a creature that is thrown should not care about map. It should go along its path and it's interactionHandlers job to monitor if it collides or not.
 // if thrown creature stops, but it still had travel distance, it will take damage depending on how much travel dist. was left
 // if a thrown action occurs, turnTaker should stop normal flow of turn and resolve thrown object. Then resume normal order.
+// if two creatures collide, they should take damage
 
 // animation for creature fragging that is hit against a wall (letter sign disappears and multiple other '&' signs jump randomly around)
 	// maybe have a function in creature called explode() -> how can Creature affect state of world? needs to create other flying entities
@@ -84,8 +85,9 @@ public:
 		vpThings.push_back(fiend);
 
 		Creature* fiend2 = new Creature("Fiend2", 'F', { 0,5 }, olc::DARK_MAGENTA, &interactionHandler, &ai, &fElapsedTime, this);
-		fiend->equip(new Axe(this, &fElapsedTime));
+		fiend2->equip(new Axe(this, &fElapsedTime));
 		vpThings.push_back(fiend2);
+
 
 		for (int x = 0; x < 25; ++x)
 			for (int y = 0; y < 15; ++y) {
@@ -150,12 +152,12 @@ public:
 		turnTaker.update(vpThings);
 		map.update(vpThings);
 
-		// check and resolve animations first, if any
+		// check and resolve physics first, if any
 		bool physicsPlaying = false;
 
 		for (Thing* thing : vpThings) {
 
-			if (thing->physics.isBusy()) {
+			if (thing->physics.hasWork()) {
 
 				thing->physics.execute();
 				physicsPlaying = true;

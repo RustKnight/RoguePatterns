@@ -20,7 +20,7 @@ void Physics::getThrown(int TilesThrown, Command* dir)
 
 }
 
-bool Physics::isBusy()
+bool Physics::hasWork()
 {
     return busy;
 }
@@ -54,6 +54,7 @@ void Physics::execute()
 
     if (thing.getPosition() != targetPosition)
         thing.interactionHandler->handleAction(&thing, direction);
+
     else
         // means we didn't hit anything while flying - job done
         busy = false;

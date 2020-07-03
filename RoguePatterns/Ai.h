@@ -28,7 +28,6 @@ public:
 
 
 	Command* decideAction(Creature* caller) override;
-	void controlCreatures();
 
 	void selectBehaviour();
 
