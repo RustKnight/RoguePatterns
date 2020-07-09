@@ -1,6 +1,8 @@
 #pragma once
 
 
+// TO-DO int / float Points
+
 struct Point {
 
 	Point() = default;

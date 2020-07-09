@@ -81,6 +81,8 @@ void Physics::calculateCollision()
 
         thing.takeDamage(cells * 2);
         busy = false;
+
+
     }
     
 }

@@ -150,7 +150,7 @@ public:
 
 
 		turnTaker.update(vpThings);
-		map.update(vpThings);
+		map.update(vpThings); // bugged af
 
 		// check and resolve physics first, if any
 		bool physicsPlaying = false;

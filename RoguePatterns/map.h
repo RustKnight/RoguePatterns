@@ -30,6 +30,8 @@ public:
 
 	void update(const std::vector<Thing*> vec);
 	
+	void updateThingPositon(Point currentPoint, Point nextPoint);
+
 	Cell& checkCell(Point p);
 	
 	void clearThings();

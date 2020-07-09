@@ -43,4 +43,5 @@ void TurnTaker::nextCreature()
 		turnID = 0;
 		//roundCounter++;
 	}
+
 }

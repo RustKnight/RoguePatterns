@@ -8,6 +8,10 @@
 
 // needs update to refresh things container, for cases where new ones are added or other ones die.
 
+// keep track of rounds (round = 1 action from all players) for things like spells (slow, has effect 2 rounds)
+// would call all creatures, creature.newRound() to inform them
+	// creatures would have an effect object that alters them in a way
+
 class TurnTaker
 {
 public:

@@ -2,6 +2,7 @@
 
 #include "Thing.h"
 
+#include <SFML/Window/Event.hpp>
 
 class Obstacle : public Thing
 {
