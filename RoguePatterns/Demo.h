@@ -130,17 +130,17 @@ public:
 	
 		Clear(olc::BLACK);
 		{
-
+		
 			if (GetMouseWheel() > 0) {
 				board.cellSizeX++;
 				board.cellSizeY++;
 			}
-
+		
 			if (GetMouseWheel() < 0) {
 				board.cellSizeX--;
 				board.cellSizeY--;
 			}
-
+		
 			if (GetKey(olc::G).bPressed)
 				board.toggleGrid();
 		}
@@ -152,21 +152,8 @@ public:
 		turnTaker.update(vpThings);
 		map.update(vpThings); // bugged af
 
-		// check and resolve physics first, if any
-		bool physicsPlaying = false;
-
-		for (Thing* thing : vpThings) {
-
-			if (thing->physics.hasWork()) {
-
-				thing->physics.execute();
-				physicsPlaying = true;
-			}
-		}
-
-		if (!physicsPlaying)
-			turnTaker.handleTurns();
-
+	
+		turnTaker.handleTurns();
 		
 		board.drawBoard();
 

@@ -18,9 +18,13 @@ public:
 
 	TurnTaker(std::vector<Thing*> vec) : vThings{vec}, turnID {0}//, roundCounter {0}
 	{}
-
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="vec"></param>
 	void update(std::vector<Thing*> vec);
 	void handleTurns();
+	bool InterruptsExist();
 
 	Thing* whoPlaysNow() const;
 private:

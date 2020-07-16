@@ -14,12 +14,31 @@ void TurnTaker::handleTurns()
 {
 	Thing* playingThing = vThings[turnID];
 		
+	// stop normal turns if interrupts exist
+	if (InterruptsExist())
+		return;
 
 	playingThing->act();
 
 	// next turn only after physics is done from moving from A to B (i.e
 	if (playingThing->isDone()) nextCreature();
 	
+}
+
+bool TurnTaker::InterruptsExist()
+{
+	bool physicsPlaying = false;
+
+	for (Thing* thing : vThings) {
+
+		if (thing->physics.hasWork()) {
+
+			thing->physics.execute();
+			physicsPlaying = true;
+		}
+	}
+
+	return physicsPlaying;
 }
 
 Thing* TurnTaker::whoPlaysNow() const
